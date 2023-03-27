@@ -13,28 +13,27 @@ def create():
     return jsonify({'success': True})
 
 
-@projects_bp.route('/get/byProjectId/{project_id}', methods=['GET'])
+@projects_bp.route('/get/byProjectId/<string:project_id>', methods=['GET'])
 def get_byprojectid(project_id):
     result = project_db.Query_One({'_id': bson.ObjectId(project_id)})
     return jsonify({'success': True, 'result': result})
 
 
-@projects_bp.route('/get/byUserId/{user_id}', methods=['GET'])
+@projects_bp.route('/get/byUserId/<string:user_id>', methods=['GET'])
 def get_byuserid(user_id):
     results = project_db.Query({ 'user_ids': { '$in': [user_id] } })
     return jsonify({'success': True, 'results': results})
 
 
-@projects_bp.route('/update/byProjectId/{project_id}', methods=['POST'])
+@projects_bp.route('/update/byProjectId/<string:project_id>', methods=['POST'])
 def update_byprojectid(project_id):
     data = request.get_json()
     project_db.Update_One({'_id': bson.ObjectId(project_id)}, {'$set': data})
     return jsonify({'success': True})
 
 
-@projects_bp.route('/delete/byProjectId/{project_id}', methods=['POST'])
+@projects_bp.route('/delete/byProjectId/<string:project_id>', methods=['POST'])
 def delete_byproject(project_id):
-    data = request.get_json()
     project_db.Delete_One({'_id': bson.ObjectId(project_id)})
     return jsonify({'success': True})
 
