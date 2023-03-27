@@ -3,7 +3,7 @@ from services.mongodb import MongoDB
 import bson
 
 project_db = MongoDB('general', 'projects')
-bp = Blueprint('auth', __name__, url_prefix='/projects')
+bp = Blueprint('projects', __name__, url_prefix='/projects')
 
 
 @bp.route('/create', methods=['POST'])
