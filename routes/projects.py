@@ -31,11 +31,10 @@ def update(project_id):
     return jsonify({'success': True})
 
 
-@projects.route('/delete', methods=['POST'])
-def delete():
+@projects.route('/delete/byProjectId/{project_id}', methods=['POST'])
+def delete(project_id):
     data = request.get_json()
-    id = data['_id']
-    project_db.Delete_One({'_id': bson.ObjectId(id)})
+    project_db.Delete_One({'_id': bson.ObjectId(project_id)})
     return jsonify({'success': True})
 
 
