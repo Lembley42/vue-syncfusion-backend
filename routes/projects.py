@@ -15,7 +15,8 @@ def create():
 
 @projects_bp.route('/get/byProjectId/{project_id}', methods=['GET'])
 def get_byprojectid(project_id):
-    project_db.Query_One({'_id': bson.ObjectId(project_id)})
+    result = project_db.Query_One({'_id': bson.ObjectId(project_id)})
+    return jsonify({'success': True, 'result': result})
 
 
 @projects_bp.route('/get/byUserId/{user_id}', methods=['GET'])
