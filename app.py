@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import pymongo, json, os, datetime
 
-import routes.auth as auth
+import routes.auth as bp
 import routes.projects as projects
 from config import API_KEY
 
@@ -10,7 +10,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Register blueprints
-for bp in [auth, projects]:
+for bp in [bp, projects]:
     app.register_blueprint(bp.bp)
 
 

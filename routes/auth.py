@@ -3,10 +3,10 @@ from services.mongodb import MongoDB
 from services.hashing import hash_password, verify_password
 
 user_db = MongoDB('general', 'users')
-auth = Blueprint('auth', __name__, url_prefix='/auth')
+bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 
-@auth.route('/login', methods=['POST'])
+@bp.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
     email = data['email']
@@ -18,7 +18,7 @@ def login():
         return jsonify({'success': False})
 
 
-@auth.route('/register', methods=['POST'])
+@bp.route('/register', methods=['POST'])
 def register():
     data = request.get_json()
     email = data['email']
@@ -31,6 +31,6 @@ def register():
     return jsonify({'success': True})
 
 
-@auth.route('/logout', methods=['POST'])
+@bp.route('/logout', methods=['POST'])
 def logout():
     return jsonify({'success': True})
