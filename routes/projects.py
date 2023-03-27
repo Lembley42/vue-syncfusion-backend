@@ -11,7 +11,8 @@ projects_bp = Blueprint('projects', __name__, url_prefix='/projects')
 def create():
     data = request.get_json()
     project_db.Insert_One(data)
-    return 200
+    return jsonify({'success': True}), 200
+    
 
 
 @projects_bp.route('/get/byProjectId/<string:project_id>', methods=['GET'])
@@ -32,12 +33,12 @@ def get_byuserid(user_id):
 def update_byprojectid(project_id):
     data = request.get_json()
     project_db.Update_One({'_id': bson.ObjectId(project_id)}, {'$set': data})
-    return 200
+    return jsonify({'success': True}), 200
 
 
 @projects_bp.route('/delete/byProjectId/<string:project_id>', methods=['POST'])
 def delete_byproject(project_id):
     project_db.Delete_One({'_id': bson.ObjectId(project_id)})
-    return 200
+    return jsonify({'success': True}), 200
 
 
