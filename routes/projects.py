@@ -24,7 +24,7 @@ def get_byprojectid(project_id):
 @projects_bp.route('/get/byUserId/<string:user_id>', methods=['GET'])
 def get_byuserid(user_id):
     results = project_db.Query({ 'user_ids': { '$in': [user_id] } })
-    json_data = json.dumps(results, cls=Get_Encoder())
+    json_data = json.dumps(list(results), cls=Get_Encoder())
     return json_data, 200
 
 
