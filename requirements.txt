@@ -1,0 +1,7 @@
+gevent
+gunicorn
+flask
+flask-cors
+pymongo
+bson
+bcrypt
