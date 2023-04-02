@@ -8,15 +8,11 @@ projects_bp = Blueprint('projects', __name__, url_prefix='/projects')
 
 
 
-# 400 - Bad request (missing name or user_ids)
 # 201 - Created (project created)
 @projects_bp.route('/create', methods=['POST'])
 def create():
     data = request.get_json()
 
-    if 'name' not in data or 'user_ids' not in data:
-        return make_response(jsonify({'success': False, 'message': 'Invalid request.'}), 400)
-    
     project_db.Insert_One(data)
     return make_response(jsonify({'success': True}), 201)
 
