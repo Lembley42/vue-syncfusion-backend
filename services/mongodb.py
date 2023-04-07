@@ -109,7 +109,7 @@ class MongoDB(object):
         Insert a single document into MongoDB.
         """
         result = self.collection.insert_one(data)
-        return result.to_dict()
+        return str(result.inserted_id)
     
     def Insert_Many(self, data):
         """
