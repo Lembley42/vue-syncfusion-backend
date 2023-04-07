@@ -52,7 +52,7 @@ class MongoDB(object):
         """
         Query the MongoDB database.
         """
-        return self.collection.find(query)
+        return list(self.collection.find(query))
     
 
     def Query_One(self, query):
@@ -82,16 +82,16 @@ class MongoDB(object):
         """
         Update data in MongoDB.
         """
-        self.collection.update_many(query, update)
-        return True
+        results = self.collection.update_many(query, update)
+        return results.to_dict()
     
 
     def Update_One(self, query, update):
         """
         Update data in MongoDB.
         """
-        self.collection.update_one(query, update)
-        return True
+        result = self.collection.update_one(query, update)
+        return result.to_dict()
 
 
     def Update_Or_Upsert(self, query, update_dict):
@@ -108,15 +108,15 @@ class MongoDB(object):
         """
         Insert a single document into MongoDB.
         """
-        self.collection.insert_one(data)
-        return True
+        result = self.collection.insert_one(data)
+        return result.to_dict()
     
     def Insert_Many(self, data):
         """
         Insert many documents into MongoDB.
         """
-        self.collection.insert_many(data)
-        return True
+        results = self.collection.insert_many(data)
+        return results.to_dict()
 
 
     def Count(self, query):
