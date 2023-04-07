@@ -16,9 +16,9 @@ def login():
         email, password = data
     else: return make_response(jsonify({'message': 'Invalid request.'}), 400)
 
-    if result:=user_db.Query_One({'email': email, 'password': hash_password(password)}):
+    result = user_db.Query_One({'email': email})
+    if result and verify_password(password, result['password']):
         return make_response(jsonify({'result': result}), 200)
-
     else:
         return make_response(jsonify({'message': 'Invalid email or password.'}), 401)
 
