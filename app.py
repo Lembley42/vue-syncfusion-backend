@@ -5,13 +5,14 @@ import pymongo, json, os, datetime
 
 from routes.auth import auth_bp
 from routes.projects import projects_bp
+from routes.tasks import tasks_bp
 from config import API_KEY
 
 app = Flask(__name__)
 CORS(app)
 
 # Register blueprints
-for bp in [auth_bp, projects_bp]:
+for bp in [auth_bp, projects_bp, tasks_bp]:
     app.register_blueprint(bp)
 
 
